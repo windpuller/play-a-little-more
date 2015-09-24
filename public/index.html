@@ -61,10 +61,87 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-git-base-commands" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/24/git-base-commands/" class="article-date">
+  <time datetime="2015-09-24T03:52:12.000Z" itemprop="datePublished">2015-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/24/git-base-commands/">git base commands</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="初始化">初始化</h3><pre><code>$ <span class="keyword">mkdir</span> <span class="keyword">test</span>
+$ <span class="keyword">cd</span> <span class="keyword">test</span>
+$ git init
+</code></pre><h3 id="config">config</h3><pre><code>$ git config --global user<span class="class">.name</span> xhwang
+$ git config --global user<span class="class">.email</span> wangxuehui.chn@gmail.com
+</code></pre><h3 id="文件修改_、查看状态、文件添加以及修改提交">文件修改 、查看状态、文件添加以及修改提交</h3><pre><code><span class="char">$ </span>echo <span class="comment">"hello world"</span>&gt;&gt;new.txt
+<span class="char">$ </span>git status
+<span class="char">$ </span>git add new.txt
+<span class="char">$ </span>git status
+<span class="char">$ </span>git commit -m <span class="comment">"first"</span> //提交第一个版本
+
+<span class="char">$ </span>echo <span class="comment">"hello new world"</span>&gt;&gt;new.txt
+<span class="char">$ </span>git status
+<span class="char">$ </span>git add new.txt
+<span class="char">$ </span>git status
+<span class="char">$ </span>git commit -m <span class="comment">"second"</span> //提交第二个版本
+</code></pre><h3 id="版本切换">版本切换</h3><pre><code>$ git <span class="built_in">log</span> <span class="comment">//查看更新记录</span>
+$ git checkout commit-id <span class="comment">//使用能够区别版本的前几位即可</span>
+</code></pre><h3 id="远程提交">远程提交</h3><pre><code>$ git remote <span class="built_in">add</span> origin <span class="keyword">https</span>://github.com/XuehuiWang/test.git<span class="comment"> //添加远程仓库</span>
+$ git push -u origin master<span class="comment"> //将修改提交到服务器端</span>
+</code></pre><h3 id="检出仓库">检出仓库</h3><pre><code>$ git clone <span class="regexp">/path/</span>to<span class="regexp">/repository /</span>/创建本地仓库的克隆版本
+$ git clone uxername<span class="annotation">@host</span>:<span class="regexp">/past/</span>to<span class="regexp">/repository /</span>/创建远端服务器的克隆版本
+</code></pre><h3 id="分支">分支</h3><pre><code>$ git <span class="keyword">branch </span><span class="keyword">branch1 </span>//创建分支
+$ git checkout <span class="keyword">branch1 </span>//切换分支
+$ git <span class="keyword">branch </span>-d <span class="keyword">branch1 </span>//删除分支
+$ git <span class="keyword">push </span>origin &lt;<span class="keyword">branch&gt; </span>//将分支推送到远端仓库，不推送的话分支是不为他人所见的
+</code></pre><h3 id="更新与合并">更新与合并</h3><pre><code>$ git pull<span class="comment"> //更新本地仓库至最新改动，完成了获取fetch并合并merge改动的功能</span>
+$ git <span class="built_in">merge</span> &lt;branch&gt;<span class="comment"> //合并其他分支到当前分支</span>
+</code></pre><p>在以上两种情况下，git都会尝试自动合并改动。但是不是每次合并都能成功，可能出现冲突。这时候就需要修改文件来手动合并这些冲突。改完文件之后，需要执行以下命令以将它们标记为合并成功：<br>    $ git add <filename><br>在合并改动之前，可以使用如下命令预览差异：<br>    $ git diff <source_branch> <target_branch></target_branch></source_branch></filename></p>
+<h3 id="标签">标签</h3><pre><code>$ git <span class="built_in">tag</span> &lt;<span class="built_in">tag</span>&gt; &lt;commit<span class="attribute">-ID</span>&gt; <span class="comment">//为某个版本创建标签</span>
+</code></pre><h3 id="替换本地改动">替换本地改动</h3><pre><code><span class="variable">$ </span>git checkout -- &lt;filename&gt; <span class="regexp">//</span>如果操作失误，可以使用<span class="constant">HEAD</span>中的最新内容替换掉工作目录中的文件，已添加到缓存区的改动和新文件都不会受到影响？
+</code></pre><p>如果想要放弃本地的所有改动和提交，可以到服务器上获取最新的版本历史，并将本地主分支指向它：<br>    $ git fetch origin<br>    $ git reset –hard origin/master </p>
+<h3 id="实用小贴士">实用小贴士</h3><pre><code>$ gitk <span class="comment">//内建的图形化git</span>
+$ git config <span class="attribute">color</span><span class="class">.ui</span> true <span class="comment">//彩色的git输出</span>
+$ git config format<span class="class">.pretty</span> oneline <span class="comment">//显示历史记录时，每个提交的信息只显示一行</span>
+$ git add -<span class="tag">i</span> <span class="comment">//交互式添加文件到暂存区</span>
+</code></pre><h4 id="参考文献：">参考文献：</h4><ol>
+<li><a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">http://rogerdudler.github.io/git-guide/index.zh.html</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/24/git-base-commands/" data-id="ciexp9ga10000xgam144ptg7o" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/09/13/hello-world/" class="article-date">
-  <time datetime="2015-09-13T01:45:17.949Z" itemprop="datePublished">2015-09-13</time>
+  <time datetime="2015-09-13T12:08:23.048Z" itemprop="datePublished">2015-09-13</time>
 </a>
     
   </div>
@@ -96,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/13/hello-world/" data-id="ciehw7hf80000neamfe16j9ub" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/13/hello-world/" data-id="ciexp9gay0003xgam6mpgiyc0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,14 +191,28 @@
     
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/git/" style="font-size: 10px;">git</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -131,6 +222,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/09/24/git-base-commands/">git base commands</a>
+          </li>
         
           <li>
             <a href="/2015/09/13/hello-world/">Hello World</a>
