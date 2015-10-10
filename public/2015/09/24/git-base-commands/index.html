@@ -12,9 +12,9 @@
     <meta name="description" content="初始化$ mkdir test
 $ cd test
 $ git init
-config$ git config --global user.name xhwang
-$ git config --global user.email wangxuehui.chn@gmail.com
-文件修改 、查看状态">
+config$ git config --global user.name username
+$ git config --global user.email useremail.chn@gmail.com
+文件修改 、查看状">
     
     
     
@@ -82,7 +82,7 @@ $ git config --global user.email wangxuehui.chn@gmail.com
     </p>
   <p class="article-time">
     <time datetime="2015-09-24T03:52:12.000Z" itemprop="datePublished">2015-09-24</time>
-    更新日期:<time datetime="2015-10-10T06:25:12.261Z" itemprop="dateModified">2015-10-10</time>
+    更新日期:<time datetime="2015-10-10T09:38:12.227Z" itemprop="dateModified">2015-10-10</time>
     
   </p>
 </header>
@@ -92,72 +92,33 @@ $ git config --global user.email wangxuehui.chn@gmail.com
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
-		<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化"><span class="toc-number">1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#config"><span class="toc-number">2.</span> <span class="toc-text">config</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件修改_、查看状态、文件添加以及修改提交"><span class="toc-number">3.</span> <span class="toc-text">文件修改 、查看状态、文件添加以及修改提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#版本切换"><span class="toc-number">4.</span> <span class="toc-text">版本切换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程提交"><span class="toc-number">5.</span> <span class="toc-text">远程提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#检出仓库"><span class="toc-number">6.</span> <span class="toc-text">检出仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分支"><span class="toc-number">7.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更新与合并"><span class="toc-number">8.</span> <span class="toc-text">更新与合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标签"><span class="toc-number">9.</span> <span class="toc-text">标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#替换本地改动"><span class="toc-number">10.</span> <span class="toc-text">替换本地改动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实用小贴士"><span class="toc-number">11.</span> <span class="toc-text">实用小贴士</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#参考文献："><span class="toc-number">11.1.</span> <span class="toc-text">参考文献：</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化"><span class="toc-number">1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#config"><span class="toc-number">2.</span> <span class="toc-text">config</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件修改_、查看状态、文件添加以及修改提交"><span class="toc-number">3.</span> <span class="toc-text">文件修改 、查看状态、文件添加以及修改提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#版本切换"><span class="toc-number">4.</span> <span class="toc-text">版本切换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程提交"><span class="toc-number">5.</span> <span class="toc-text">远程提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#检出仓库"><span class="toc-number">6.</span> <span class="toc-text">检出仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分支"><span class="toc-number">7.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更新与合并"><span class="toc-number">8.</span> <span class="toc-text">更新与合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标签"><span class="toc-number">9.</span> <span class="toc-text">标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#替换本地改动"><span class="toc-number">10.</span> <span class="toc-text">替换本地改动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实用小贴士"><span class="toc-number">11.</span> <span class="toc-text">实用小贴士</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考文献："><span class="toc-number">12.</span> <span class="toc-text">参考文献：</span></a></li></ol>
 		</div>
 		
 		<h4 id="初始化">初始化</h4><pre><code>$ <span class="keyword">mkdir</span> <span class="keyword">test</span>
 $ <span class="keyword">cd</span> <span class="keyword">test</span>
 $ git init
-</code></pre><h4 id="config">config</h4><pre><code>$ git config --global user<span class="class">.name</span> xhwang
-$ git config --global user<span class="class">.email</span> wangxuehui.chn@gmail.com
+</code></pre><h4 id="config">config</h4><pre><code>$ git config --global user<span class="class">.name</span> username
+$ git config --global user<span class="class">.email</span> useremail.chn@gmail.com
 </code></pre><h4 id="文件修改_、查看状态、文件添加以及修改提交">文件修改 、查看状态、文件添加以及修改提交</h4><pre><code><span class="variable">$ </span>echo <span class="string">"hello world"</span><span class="prompt">&gt;&gt;</span>new.txt
 <span class="variable">$ </span>git status
 <span class="variable">$ </span>git add new.txt
 <span class="variable">$ </span>git status
-提交第一个版本
-<span class="variable">$ </span>git commit -m <span class="string">"first"</span> 
-
-<span class="variable">$ </span>echo <span class="string">"hello new world"</span><span class="prompt">&gt;&gt;</span>new.txt
+</code></pre><p>提交第一个版本<br>    $ git commit -m “first” </p>
+<pre><code><span class="variable">$ </span>echo <span class="string">"hello new world"</span><span class="prompt">&gt;&gt;</span>new.txt
 <span class="variable">$ </span>git status
 <span class="variable">$ </span>git add new.txt
 <span class="variable">$ </span>git status
-提交第二个版本
-<span class="variable">$ </span>git commit -m <span class="string">"second"</span> 
-</code></pre><h4 id="版本切换">版本切换</h4><pre><code>查看更新记录
-$ git <span class="command">log</span> 
-使用能够区别版本的前几位即可
-$ git checkout commit-<span class="property">id</span>
-</code></pre><h4 id="远程提交">远程提交</h4><pre><code>添加远程仓库
-<span class="variable">$ </span>git remote add origin <span class="symbol">https:</span>/<span class="regexp">/github.com/</span><span class="constant">XuehuiWang</span>/test.git 
-将修改提交到服务器端
-<span class="variable">$ </span>git push -u origin master 
-</code></pre><h4 id="检出仓库">检出仓库</h4><pre><code>创建本地仓库的克隆版本
-<span class="variable">$ </span>git clone /path/to/repository 
-创建远端服务器的克隆版本
-<span class="variable">$ </span>git clone uxername<span class="variable">@host</span><span class="symbol">:/past/to/repository</span> 
-</code></pre><h4 id="分支">分支</h4><pre><code>创建分支
-$ git <span class="keyword">branch </span><span class="keyword">branch1 </span>
-切换分支
-$ git checkout <span class="keyword">branch1 </span>
-删除分支
-$ git <span class="keyword">branch </span>-d <span class="keyword">branch1 </span>
-将分支推送到远端仓库，不推送的话分支是不为他人所见的
-$ git <span class="keyword">push </span>origin &lt;<span class="keyword">branch&gt; </span>
-</code></pre><h4 id="更新与合并">更新与合并</h4><pre><code>更新本地仓库至最新改动，完成了获取fetch并合并merge改动的功能
-$ git pull
-合并其他分支到当前分支
-$ git merge <span class="tag">&lt;<span class="title">branch</span>&gt;</span> 
-在以上两种情况下，git都会尝试自动合并改动。但是不是每次合并都能成功，可能出现冲突。
-这时候就需要修改文件来手动合并这些冲突。改完文件之后，需要执行以下命令以将它们标记为合并成功：
-$ git add <span class="tag">&lt;<span class="title">filename</span>&gt;</span>
-在合并改动之前，可以使用如下命令预览差异：
-$ git diff <span class="tag">&lt;<span class="title">source_branch</span>&gt;</span> <span class="tag">&lt;<span class="title">target_branch</span>&gt;</span>
-</code></pre><h4 id="标签">标签</h4><pre><code>为某个版本创建标签
-$ git <span class="keyword">tag</span> <span class="variable">&lt;tag&gt;</span> <span class="variable">&lt;commit-ID&gt;</span> 
-</code></pre><h4 id="替换本地改动">替换本地改动</h4><pre><code>如果操作失误，可以使用<span class="constant">HEAD</span>中的最新内容替换掉工作目录中的文件，已添加到缓存区的改动和新文件都不会受到影响
-<span class="variable">$ </span>git checkout -- &lt;filename&gt; 
-如果想要放弃本地的所有改动和提交，可以到服务器上获取最新的版本历史，并将本地主分支指向它：
-<span class="variable">$ </span>git fetch origin
-<span class="variable">$ </span>git reset --hard origin/master 
-</code></pre><h4 id="实用小贴士">实用小贴士</h4><pre><code>内建的图形化git
-$ gitk 
-彩色的git输出
-$ git config <span class="attribute">color</span><span class="class">.ui</span> true 
-显示历史记录时，每个提交的信息只显示一行
-$ git config format<span class="class">.pretty</span> oneline 
-交互式添加文件到暂存区
-$ git add -<span class="tag">i</span> 
-</code></pre><h5 id="参考文献：">参考文献：</h5><ol>
+</code></pre><p>提交第二个版本<br>    $ git commit -m “second” </p>
+<h4 id="版本切换">版本切换</h4><p>查看更新记录<br>    $ git log<br>使用能够区别版本的前几位即可<br>    $ git checkout commit-id</p>
+<h4 id="远程提交">远程提交</h4><p>添加远程仓库<br>    $ git remote add origin <a href="https://github.com/windpuller/test.git" target="_blank" rel="external">https://github.com/windpuller/test.git</a><br>将修改提交到服务器端<br>    $ git push -u origin master </p>
+<h4 id="检出仓库">检出仓库</h4><p>创建本地仓库的克隆版本<br>    $ git clone /path/to/repository<br>创建远端服务器的克隆版本<br>    $ git clone uxername@host:/past/to/repository </p>
+<h4 id="分支">分支</h4><p>创建分支<br>    $ git branch branch1<br>切换分支<br>    $ git checkout branch1<br>删除分支<br>    $ git branch -d branch1<br>将分支推送到远端仓库，不推送的话分支是不为他人所见的<br>    $ git push origin branch1</p>
+<h4 id="更新与合并">更新与合并</h4><p>更新本地仓库至最新改动，完成了获取fetch并合并merge改动的功能<br>    $ git pull<br>合并其他分支到当前分支<br>    $ git merge branch<br>在以上两种情况下，git都会尝试自动合并改动。但是不是每次合并都能成功，可能出现冲突。<br>这时候就需要修改文件来手动合并这些冲突。改完文件之后，需要执行以下命令以将它们标记为合并成功：<br>    $ git add filename<br>在合并改动之前，可以使用如下命令预览差异：<br>    $ git diff source_branch target_branch</p>
+<h4 id="标签">标签</h4><p>为某个版本创建标签<br>    $ git tag tag-name commit-ID</p>
+<h4 id="替换本地改动">替换本地改动</h4><p>如果操作失误，可以使用HEAD中的最新内容替换掉工作目录中的文件，已添加到缓存区的改动和新文件都不会受到影响<br>    $ git checkout – filename<br>如果想要放弃本地的所有改动和提交，可以到服务器上获取最新的版本历史，并将本地主分支指向它：<br>    $ git fetch origin<br>    $ git reset –hard origin/master </p>
+<h4 id="实用小贴士">实用小贴士</h4><p>内建的图形化git<br>    $ gitk<br>彩色的git输出<br>    $ git config color.ui true<br>显示历史记录时，每个提交的信息只显示一行<br>    $ git config format.pretty oneline<br>交互式添加文件到暂存区<br>    $ git add -i </p>
+<h4 id="参考文献：">参考文献：</h4><ol>
 <li><a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">http://rogerdudler.github.io/git-guide/index.zh.html</a></li>
 </ol>
   
@@ -187,7 +148,7 @@ $ git add -<span class="tag">i</span>
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
-  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化"><span class="toc-number">1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#config"><span class="toc-number">2.</span> <span class="toc-text">config</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件修改_、查看状态、文件添加以及修改提交"><span class="toc-number">3.</span> <span class="toc-text">文件修改 、查看状态、文件添加以及修改提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#版本切换"><span class="toc-number">4.</span> <span class="toc-text">版本切换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程提交"><span class="toc-number">5.</span> <span class="toc-text">远程提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#检出仓库"><span class="toc-number">6.</span> <span class="toc-text">检出仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分支"><span class="toc-number">7.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更新与合并"><span class="toc-number">8.</span> <span class="toc-text">更新与合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标签"><span class="toc-number">9.</span> <span class="toc-text">标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#替换本地改动"><span class="toc-number">10.</span> <span class="toc-text">替换本地改动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实用小贴士"><span class="toc-number">11.</span> <span class="toc-text">实用小贴士</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#参考文献："><span class="toc-number">11.1.</span> <span class="toc-text">参考文献：</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化"><span class="toc-number">1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#config"><span class="toc-number">2.</span> <span class="toc-text">config</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件修改_、查看状态、文件添加以及修改提交"><span class="toc-number">3.</span> <span class="toc-text">文件修改 、查看状态、文件添加以及修改提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#版本切换"><span class="toc-number">4.</span> <span class="toc-text">版本切换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程提交"><span class="toc-number">5.</span> <span class="toc-text">远程提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#检出仓库"><span class="toc-number">6.</span> <span class="toc-text">检出仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分支"><span class="toc-number">7.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更新与合并"><span class="toc-number">8.</span> <span class="toc-text">更新与合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标签"><span class="toc-number">9.</span> <span class="toc-text">标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#替换本地改动"><span class="toc-number">10.</span> <span class="toc-text">替换本地改动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实用小贴士"><span class="toc-number">11.</span> <span class="toc-text">实用小贴士</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考文献："><span class="toc-number">12.</span> <span class="toc-text">参考文献：</span></a></li></ol>
   </div>
 
 <div id="asidepart">
