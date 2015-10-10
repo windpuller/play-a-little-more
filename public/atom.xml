@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title><![CDATA[play a litle more]]></title>
+  <title><![CDATA[play a litle more!]]></title>
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-09-24T09:05:42.134Z</updated>
+  <updated>2015-10-10T06:25:12.261Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yoursite.com/2015/09/24/git-base-commands/"/>
     <id>http://yoursite.com/2015/09/24/git-base-commands/</id>
     <published>2015-09-24T03:52:12.000Z</published>
-    <updated>2015-09-24T09:05:42.134Z</updated>
+    <updated>2015-10-10T06:25:12.261Z</updated>
     <content type="html"><![CDATA[<h4 id="初始化">初始化</h4><pre><code>$ <span class="keyword">mkdir</span> <span class="keyword">test</span>
 $ <span class="keyword">cd</span> <span class="keyword">test</span>
 $ git init
@@ -62,7 +62,8 @@ $ git <span class="keyword">push </span>origin &lt;<span class="keyword">branch&
 $ git pull
 合并其他分支到当前分支
 $ git merge <span class="tag">&lt;<span class="title">branch</span>&gt;</span> 
-在以上两种情况下，git都会尝试自动合并改动。但是不是每次合并都能成功，可能出现冲突。这时候就需要修改文件来手动合并这些冲突。改完文件之后，需要执行以下命令以将它们标记为合并成功：
+在以上两种情况下，git都会尝试自动合并改动。但是不是每次合并都能成功，可能出现冲突。
+这时候就需要修改文件来手动合并这些冲突。改完文件之后，需要执行以下命令以将它们标记为合并成功：
 $ git add <span class="tag">&lt;<span class="title">filename</span>&gt;</span>
 在合并改动之前，可以使用如下命令预览差异：
 $ git diff <span class="tag">&lt;<span class="title">source_branch</span>&gt;</span> <span class="tag">&lt;<span class="title">target_branch</span>&gt;</span>
