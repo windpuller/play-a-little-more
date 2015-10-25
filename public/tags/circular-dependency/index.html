@@ -1,10 +1,10 @@
 
- <!DOCTYPE HTML>
+  <!DOCTYPE HTML>
 <html >
 <head>
   <meta charset="UTF-8">
   
-    <title>play a litle more!</title>
+    <title>Tag: circular dependency | play a litle more!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="windpuller">
@@ -22,9 +22,9 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 
-  <body>
-    <header>
-      <div>
+    <body>
+      <header>
+        <div>
 		
 			<div id="imglogo">
 				<a href="/"><img src="/img/logo.jpg" alt="play a litle more!" title="play a litle more!"/></a>
@@ -60,11 +60,16 @@
 			</nav>			
 </div>
 
-    </header>
-    
+      </header>
+      <div id="container">
+        
 
-    <div id="container">
-      <div id="main">
+<div class="archive-title" >
+  <h2 class="tag-icon">circular dependency</h2>
+  
+</div>
+<div id="main" class="archive-part clearfix">
+  <div id="archive-page">
 
   <section class="post" itemscope itemprop="blogPost">
   
@@ -72,63 +77,16 @@
   
     <h1 itemprop="name">Spring circular dependency</h1>
     
-     
-           <p itemprop="description" >最近踩了一个继承加循环依赖的坑，抽象出的代码如下：ChildClass:12345678910@Servicepublic class ChildClass extends ParentClass &amp;#123;    @Resource    private TestServic</p>
-        
-    
     <time datetime="2015-10-25T06:11:22.000Z" itemprop="datePublished">2015-10-25</time>
   </a>
 </section>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2015/09/24/git-base-commands/" title="git base commands" itemprop="url">
-  
-    <h1 itemprop="name">git base commands</h1>
-    
-     
-           <p itemprop="description" >初始化$ mkdir test$ cd test$ git init
-config$ git config –global user.name username$ git config –global user.email useremail.chn@gmail.com
-文件修改</p>
-        
-    
-    <time datetime="2015-09-24T03:52:12.000Z" itemprop="datePublished">2015-09-24</time>
-  </a>
-</section>
 
-
-</div>
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
-<aside class="clearfix">
-
-  
-
-  
-<div class="tagslist">
-	<p class="asidetitle">標簽</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/circular-dependency/" title="circular dependency">circular dependency<sup>1</sup></a></li>
-		
-			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
-		
-			<li><a href="/tags/inherited/" title="inherited">inherited<sup>1</sup></a></li>
-		
-			<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
-		
-			<li><a href="/tags/spring/" title="spring">spring<sup>1</sup></a></li>
-		
-		</ul>
+  </div>
 </div>
 
-
-</aside>
-</div>
-    </div>
-    <footer><div id="footer" >
+      </div>
+      <footer><div id="footer" >
 	
 	<div class="line">
 		<span></span>
@@ -149,7 +107,7 @@ config$ git config –global user.name username$ git config –global user.email
 		</p>
 </div>
 </footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
+      <script src="/js/jquery-2.1.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){ 
   $('.navbar').click(function(){
@@ -204,6 +162,6 @@ $(document).ready(function(){
 
 
 
-  </body>
- </html>
+    </body>
+   </html>
 

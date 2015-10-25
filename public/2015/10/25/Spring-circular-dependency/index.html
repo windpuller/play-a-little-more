@@ -1,76 +1,311 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title><![CDATA[play a litle more!]]></title>
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
   
-  <link href="/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2015-10-25T10:29:23.657Z</updated>
-  <id>http://yoursite.com/</id>
-  
-  <author>
-    <name><![CDATA[windpuller]]></name>
+    <title>Spring circular dependency | play a litle more!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
-  </author>
-  
-  <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title><![CDATA[Spring circular dependency]]></title>
-    <link href="http://yoursite.com/2015/10/25/Spring-circular-dependency/"/>
-    <id>http://yoursite.com/2015/10/25/Spring-circular-dependency/</id>
-    <published>2015-10-25T06:11:22.000Z</published>
-    <updated>2015-10-25T10:29:23.657Z</updated>
-    <content type="html"><![CDATA[<p>最近踩了一个继承加循环依赖的坑，抽象出的代码如下：<br>ChildClass:<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Service</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">ChildClass</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">ParentClass</span> &#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">TestService</span> testService;</span><br><span class="line"></span><br><span class="line">    public <span class="type">String</span> play() &#123;</span><br><span class="line">        <span class="keyword">return</span> testService.getParent().play();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+    <meta name="author" content="windpuller">
+    
+    <meta name="description" content="最近踩了一个继承加循环依赖的坑，抽象出的代码如下：ChildClass:12345678910@Servicepublic class ChildClass extends ParentClass &amp;#123;    @Resource    private TestService testServ">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.jpg" alt="play a litle more!" title="play a litle more!"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="play a litle more!">play a litle more!</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="搜索" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/10/25/Spring-circular-dependency/" title="Spring circular dependency" itemprop="url">Spring circular dependency</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="windpuller">windpuller</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2015-10-25T06:11:22.000Z" itemprop="datePublished">2015-10-25</time>
+    更新日期:<time datetime="2015-10-25T10:29:23.657Z" itemprop="dateModified">2015-10-25</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		
+		</div>
+		
+		<p>最近踩了一个继承加循环依赖的坑，抽象出的代码如下：<br>ChildClass:<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Service</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">ChildClass</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">ParentClass</span> &#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">TestService</span> testService;</span><br><span class="line"></span><br><span class="line">    public <span class="type">String</span> play() &#123;</span><br><span class="line">        <span class="keyword">return</span> testService.getParent().play();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>ParentClass:<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ParentClass</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String <span class="keyword">value</span> = <span class="string">"I am parent class"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">play</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">value</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span>(<span class="params">String str</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.<span class="keyword">value</span> = str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>TestService:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ParentClass parent;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        parent = create();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ParentClass <span class="title">getParent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.parent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@SuppressWarnings</span>(&#123; <span class="string">"rawtypes"</span>, <span class="string">"unchecked"</span> &#125;)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ParentClass <span class="title">create</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class classDefinition = Class.forName(<span class="string">"com.springapp.mvc.inherited.ChildClass"</span>);</span><br><span class="line">            ParentClass parent = (ParentClass) classDefinition.getConstructor(<span class="keyword">new</span> Class[<span class="number">0</span>]).newInstance(<span class="keyword">new</span> Object[<span class="number">0</span>]);</span><br><span class="line">            parent.setValue(<span class="string">"I was processed by test service"</span>);</span><br><span class="line">            <span class="keyword">return</span> parent;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>ResultController:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Controller</span></span><br><span class="line"><span class="annotation">@RequestMapping</span>(<span class="string">"/inherited"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResultController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> ChildClass childClass;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@RequestMapping</span>(method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">printWelcome</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ModelAndView modelAndView = <span class="keyword">new</span> ModelAndView(<span class="string">"hello"</span>);</span><br><span class="line">        modelAndView.addObject(<span class="string">"message"</span>, childClass.play());</span><br><span class="line">        <span class="keyword">return</span> modelAndView;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>我们注意到，ChildClass重写了ParentClass的play方法。由于在TestService中使用反射<br>方式生成了ChildClass的实例，并赋值给了ParentClass的实例，此时ParentClass实例并不能<br>访问到ChildClass实例的成员变量testService，且ParentClass实例的play方法已经被<br>ChildClass实例的play方法隐藏，也就是说<code>testService.getParent().play()</code><br>实际调用的是ChildClass的play()方法，显而易见，此处出现了循环调用。但是由于ParentClass<br>的实例中<code>testService == null</code>，因此程序在进入这一层时会抛出NPE。<br>使用调试工具查看我们访问”/inherited”时候ChildClass的成员变量testService的值，如下：<br><img src="../../../../../images/Spring-circular-dependency-reflect.png" alt="testService with parent use reflect"></p>
 <p>之后我们使用注解在TestService中实现成员变量parent的初始化，代码如下：<br>ParentClass:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestService</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="annotation">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> ParentClass parent;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        parent.setValue(<span class="string">"I was processed by test service"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ParentClass <span class="title">getParent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.parent;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>此时使用调试工具查看访问”/inherited”时候ChildClass的成员变量testService的值，如下：<br><img src="../../../../../images/Spring-circular-dependency-injection.png" alt="testService with parent use injection"><br>从<code>＠Resource</code>的注解来看，注解的继承关系是向上的，所有使用注解注入的实例共用<br>资源，即以依赖注入形式实现的ChildClass和ParentClass的实例共享资源。因此，TestService中<br>的成员变量parent可以访问到子类ChildClass实例的成员变量testService，进而形成了循环依赖并<br>最终导致栈溢出。上述现象得以解释。<br><code>＠Resource</code>部分注解：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">* Even though this annotation <span class="keyword">is</span> <span class="keyword">not</span> marked Inherited, deployment</span><br><span class="line">* tools are required <span class="keyword">to</span> examine all superclasses <span class="keyword">of</span> any component</span><br><span class="line">* <span class="type">class</span> <span class="keyword">to</span> discover all uses <span class="keyword">of</span> this annotation <span class="keyword">in</span> all superclasses.</span><br><span class="line">* All such annotation instances specify resources <span class="keyword">that</span> are needed</span><br><span class="line">* <span class="keyword">by</span> <span class="keyword">the</span> <span class="type">application</span> component.  Note <span class="keyword">that</span> this annotation may</span><br><span class="line">* appear <span class="function_start"><span class="keyword">on</span></span> private fields <span class="keyword">and</span> methods <span class="keyword">of</span> superclasses; <span class="keyword">the</span> container</span><br><span class="line">* <span class="keyword">is</span> required <span class="keyword">to</span> perform injection <span class="keyword">in</span> these cases <span class="keyword">as</span> well.</span><br></pre></td></tr></table></figure></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>最近踩了一个继承加循环依赖的坑，抽象出的代码如下：<br>ChildClass:<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span]]>
-    </summary>
-    
-      <category term="circular dependency" scheme="http://yoursite.com/tags/circular-dependency/"/>
-    
-      <category term="inherited" scheme="http://yoursite.com/tags/inherited/"/>
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-      <category term="spring" scheme="http://yoursite.com/tags/spring/"/>
-    
-  </entry>
   
-  <entry>
-    <title><![CDATA[git base commands]]></title>
-    <link href="http://yoursite.com/2015/09/24/git-base-commands/"/>
-    <id>http://yoursite.com/2015/09/24/git-base-commands/</id>
-    <published>2015-09-24T03:52:12.000Z</published>
-    <updated>2015-10-16T09:11:53.561Z</updated>
-    <content type="html"><![CDATA[<h4 id="初始化">初始化</h4><p><code>$ mkdir test</code><br><code>$ cd test</code><br><code>$ git init</code></p>
-<h4 id="config">config</h4><p><code>$ git config –global user.name username</code><br><code>$ git config –global user.email useremail.chn@gmail.com</code></p>
-<h4 id="文件修改_、查看状态、文件添加以及修改提交">文件修改 、查看状态、文件添加以及修改提交</h4><p><code>$ echo “hello world”&gt;&gt;new.txt</code><br><code>$ git status</code><br><code>$ git add new.txt</code><br><code>$ git status</code><br>提交第一个版本<br><code>$ git commit -m “first”</code> </p>
-<p><code>$ echo “hello new world”&gt;&gt;new.txt</code><br><code>$ git status</code><br><code>$ git add new.txt</code><br><code>$ git status</code><br>提交第二个版本<br><code>$ git commit -m “second”</code></p>
-<h4 id="版本切换">版本切换</h4><p>查看更新记录<br><code>$ git log</code><br>使用能够区别版本的前几位即可<br><code>$ git checkout commit-id</code></p>
-<h4 id="远程提交">远程提交</h4><p>添加远程仓库<br><code>$ git remote add origin <a href="https://github.com/windpuller/test.git" target="_blank" rel="external">https://github.com/windpuller/test.git</a></code><br>将修改提交到服务器端<br><code>$ git push -u origin master</code></p>
-<h4 id="检出仓库">检出仓库</h4><p>创建本地仓库的克隆版本<br><code>$ git clone /path/to/repository</code><br>创建远端服务器的克隆版本<br><code>$ git clone uxername@host:/past/to/repository</code></p>
-<h4 id="分支">分支</h4><p>创建分支<br><code>$ git branch branch1</code><br>切换分支<br><code>$ git checkout branch1</code><br>删除分支<br><code>$ git branch -d branch1 </code><br>将分支推送到远端仓库，不推送的话分支是不为他人所见的<br><code>$ git push origin branch1</code></p>
-<h4 id="更新与合并">更新与合并</h4><p>更新本地仓库至最新改动，完成了获取fetch并合并merge改动的功能<br><code>$ git pull</code><br>合并其他分支到当前分支<br><code>$ git merge branch</code><br>在以上两种情况下，git都会尝试自动合并改动。但是不是每次合并都能成功，可能出现冲突。<br>这时候就需要修改文件来手动合并这些冲突。改完文件之后，需要执行以下命令以将它们标记为合并成功：<br><code>$ git add filename</code><br>在合并改动之前，可以使用如下命令预览差异：<br><code>$git diff source_branch target_branch</code></p>
-<h4 id="标签">标签</h4><p>为某个版本创建标签<br><code>$ git tag tag-name commit-ID</code></p>
-<h4 id="替换本地改动">替换本地改动</h4><p>如果操作失误，可以使用HEAD中的最新内容替换掉工作目录中的文件，已添加到缓存区的改动和新文件都不会受到影响<br><code>$ git checkout – filename</code><br>如果想要放弃本地的所有改动和提交，可以到服务器上获取最新的版本历史，并将本地主分支指向它：<br><code>$ git fetch origin</code><br><code>$ git reset –hard origin/master</code></p>
-<h4 id="实用小贴士">实用小贴士</h4><p>内建的图形化git<br><code>$ gitk</code><br>彩色的git输出<br><code>$ git config color.ui true</code><br>显示历史记录时，每个提交的信息只显示一行<br><code>$ git config format.pretty oneline</code><br>交互式添加文件到暂存区<br><code>$ git add -i</code></p>
-<h4 id="参考文献：">参考文献：</h4><ol>
-<li><a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">http://rogerdudler.github.io/git-guide/index.zh.html</a></li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h4 id="初始化">初始化</h4><p><code>$ mkdir test</code><br><code>$ cd test</code><br><code>$ git init</code></p>
-<h4 id="config">config</h4><p><co]]>
-    </summary>
-    
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
-    
-  </entry>
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
   
-</feed>
+  <span></span> <a href="/tags/circular-dependency/">circular dependency</a><a href="/tags/inherited/">inherited</a><a href="/tags/java/">java</a><a href="/tags/spring/">spring</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2015/10/25/Spring-circular-dependency/" data-title="Spring circular dependency | play a litle more!" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/09/24/git-base-commands/"  title="git base commands">
+ <strong>NEXT:</strong><br/> 
+ <span>git base commands
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">標簽</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/circular-dependency/" title="circular dependency">circular dependency<sup>1</sup></a></li>
+		
+			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/inherited/" title="inherited">inherited<sup>1</sup></a></li>
+		
+			<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
+		
+			<li><a href="/tags/spring/" title="spring">spring<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="windpuller">windpuller</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+
