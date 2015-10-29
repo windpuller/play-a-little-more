@@ -84,8 +84,6 @@ public class ResultController {
 ChildClass实例的play方法隐藏，也就是说<code>testService.getParent().play()</code>  
 实际调用的是ChildClass的play()方法，显而易见，此处出现了循环调用。但是由于ParentClass  
 的实例中<code>testService == null</code>，因此程序在进入这一层时会抛出NPE。
-使用调试工具查看我们访问"/inherited"时候ChildClass的成员变量testService的值，如下：
-![testService with parent use reflect](../../../../../images/Spring-circular-dependency-reflect.png)
 
 之后我们使用注解在TestService中实现成员变量parent的初始化，代码如下：
 ParentClass:
@@ -106,12 +104,11 @@ public class TestService {
     }
 }
 ```
-此时使用调试工具查看访问"/inherited"时候ChildClass的成员变量testService的值，如下：
-![testService with parent use injection](../../../../../images/Spring-circular-dependency-injection.png)
+此时运行程序，NPE消失了，但是出现栈溢出问题。
 从<code>＠Resource</code>的注解来看，注解的继承关系是向上的，所有使用注解注入的实例共用  
 资源，即以依赖注入形式实现的ChildClass和ParentClass的实例共享资源。因此，TestService中  
-的成员变量parent可以访问到子类ChildClass实例的成员变量testService，进而形成了循环依赖并  
-最终导致栈溢出。上述现象得以解释。
+的成员变量parent可以访问到子类ChildClass实例的成员变量testService，进而形成循环依赖并  
+最终导致栈溢出。
 <code>＠Resource</code>部分注解：
 ```
  * Even though this annotation is not marked Inherited, deployment
