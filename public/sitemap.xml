@@ -2,13 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2015/11/08/transactional/</loc>
+    <lastmod>2015-11-08T08:19:07.594Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2015/10/25/Spring-circular-dependency/</loc>
     <lastmod>2015-10-29T09:38:08.607Z</lastmod>
   </url>
   
   <url>
     <loc>http://yoursite.com/2015/09/24/git-base-commands/</loc>
-    <lastmod>2015-10-16T09:11:53.561Z</lastmod>
+    <lastmod>2015-10-24T01:47:05.451Z</lastmod>
   </url>
   
 </urlset>

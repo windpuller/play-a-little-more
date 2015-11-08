@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-10-29T09:38:08.607Z</updated>
+  <updated>2015-11-08T08:19:07.594Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -13,6 +13,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[@transactional]]></title>
+    <link href="http://yoursite.com/2015/11/08/transactional/"/>
+    <id>http://yoursite.com/2015/11/08/transactional/</id>
+    <published>2015-11-08T03:36:44.000Z</published>
+    <updated>2015-11-08T08:19:07.594Z</updated>
+    <content type="html"><![CDATA[<p>在<code>＠Transactional</code>注解的程序块中调用未使用<code>＠Transactional</code>注解的方法，则事务将在未被注解的方法中继续生效。在未被注解的方法中，继续使用事务中的数据库连接，该方法中的任何异常都会引起事务的回滚。<br>在<code>＠Transactional</code>注解的程序块中调用使用<code>＠Transactional</code>注解的方法，如果这两个方法属于同一个实例，那么事务在被调用的方法中不会生效；如果两个方法属于不同的实例，则事务在被调用的方法中继续生效。<br>同理，在一个实例内部，通过未被<code>＠Transactional</code>注解的方法调用被<code>＠Transactional</code>注解的方法，被调用方法的事务也不会生效。<br>之所以会出现以上现象，是受到Spring AOP机制的限制。<code>＠Transactional</code>注解使用的是Spring的AOP机制，AOP仅在外部实例调用被注解的方法时才会生效，在同一个实例中调用任何被注解的方法都只能调用到原生方法，而不是注解后生成的代理方法。<br>如果不得不在一个实例内部调用被<code>＠Transactional</code>注解的方法，需要在这个实例内部显示的注入自身类的实例，并通过这个被注入的实例调用被注解的方法，才能访问到代理方法使事务生效。示例如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Service</span>(<span class="string">"transactionalTestClass"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TransactionalTestClass</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="annotation">@Resource</span>(<span class="string">"transactionalTestClass"</span>)</span><br><span class="line">    <span class="keyword">private</span> TransactionalTestClass transactionalTestClass;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">noTransactionalMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">        transactionalTestClass.transactionalMethod();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Transactional</span>(rollbackFor = Exception.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transactionalMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//do somthing</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在<code>＠Transactional</code>注解的程序块中调用未使用<code>＠Transactional</code>注解的方法，则事务将在未被注解的方法中继续生效。在未被注解的方法中，继续使用事务中的数据库连接，该方法中的任何异常都会引起事务的回滚。<br]]>
+    </summary>
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="spring" scheme="http://yoursite.com/tags/spring/"/>
+    
+      <category term="transactional" scheme="http://yoursite.com/tags/transactional/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Spring circular dependency]]></title>
@@ -47,7 +67,7 @@
     <link href="http://yoursite.com/2015/09/24/git-base-commands/"/>
     <id>http://yoursite.com/2015/09/24/git-base-commands/</id>
     <published>2015-09-24T03:52:12.000Z</published>
-    <updated>2015-10-16T09:11:53.561Z</updated>
+    <updated>2015-10-24T01:47:05.451Z</updated>
     <content type="html"><![CDATA[<h4 id="初始化">初始化</h4><p><code>$ mkdir test</code><br><code>$ cd test</code><br><code>$ git init</code></p>
 <h4 id="config">config</h4><p><code>$ git config –global user.name username</code><br><code>$ git config –global user.email useremail.chn@gmail.com</code></p>
 <h4 id="文件修改_、查看状态、文件添加以及修改提交">文件修改 、查看状态、文件添加以及修改提交</h4><p><code>$ echo “hello world”&gt;&gt;new.txt</code><br><code>$ git status</code><br><code>$ git add new.txt</code><br><code>$ git status</code><br>提交第一个版本<br><code>$ git commit -m “first”</code> </p>
