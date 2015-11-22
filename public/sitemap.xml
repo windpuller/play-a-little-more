@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2015/11/22/csrf-defense/</loc>
+    <lastmod>2015-11-22T08:05:01.914Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2015/11/08/transactional/</loc>
     <lastmod>2015-11-08T08:19:07.594Z</lastmod>
   </url>
