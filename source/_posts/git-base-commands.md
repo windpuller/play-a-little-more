@@ -49,10 +49,14 @@ tags: git
 <code>$ git branch branch1</code>
 切换分支
 <code>$ git checkout branch1</code>
-删除分支
+删除本地分支
 <code>$ git branch -d branch1 </code>
+删除远程分支(慎重使用)
+<code>$ git branch -r -d origin/branch1</code>
+<code>$ git push origin :branch1</code>
 将分支推送到远端仓库，不推送的话分支是不为他人所见的
 <code>$ git push origin branch1</code>
+
 
 #### 更新与合并
 更新本地仓库至最新改动，完成了获取fetch并合并merge改动的功能
