@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/01/17/mount-partitions-on-startup-in-archlinux/</loc>
+    <lastmod>2016-01-17T12:08:22.637Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2015/09/24/git-base-commands/</loc>
     <lastmod>2015-12-15T07:37:09.491Z</lastmod>
   </url>
