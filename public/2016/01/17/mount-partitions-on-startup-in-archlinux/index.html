@@ -1,0 +1,329 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>mount partitions on startup in archlinux | play a litle more!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="windpuller">
+    
+    <meta name="description" content="机器装了两个系统，一个win7备用，一个linux生产。但是最近linux的剩余磁盘空间仅10G多，眼看就要不够用了，于是想着挤挤win7，分些空间出来给linux。
+grub rescue的处理第一步，先在win7中压缩了20G出来，然后重启机器准备进入linux加载新分区，此时出现了问题，gru">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.jpg" alt="play a litle more!" title="play a litle more!"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="play a litle more!">play a litle more!</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
+                        <input name=tn type=hidden value="bds">
+                        <input name=cl type=hidden value="3">
+                        <input name=ct type=hidden value="2097152">
+						<input type="hidden" name="si" value="yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/17/mount-partitions-on-startup-in-archlinux/" title="mount partitions on startup in archlinux" itemprop="url">mount partitions on startup in archlinux</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="windpuller">windpuller</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-01-17T09:36:47.000Z" itemprop="datePublished">2016-01-17</time>
+    Updated:<time datetime="2016-01-17T12:08:22.637Z" itemprop="dateModified">2016-01-17</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#grub_rescue的处理"><span class="toc-number">1.</span> <span class="toc-text">grub rescue的处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#archlinux挂载分区"><span class="toc-number">2.</span> <span class="toc-text">archlinux挂载分区</span></a></li></ol>
+		</div>
+		
+		<p>机器装了两个系统，一个win7备用，一个linux生产。但是最近linux的剩余磁盘空间仅10G多，<br>眼看就要不够用了，于是想着挤挤win7，分些空间出来给linux。</p>
+<h4 id="grub_rescue的处理">grub rescue的处理</h4><p>第一步，先在win7中压缩了20G出来，然后重启机器准备进入linux加载新分区，此时出现了<br>问题，grub无法正常启动，进入了rescue界面。<br>解决办法是：</p>
+<ol>
+<li>列出所有分区<br>grub rescue&gt; ls</li>
+<li>依次ls每个分区直到找到不报’unknown filesystem’的分区，比如n=5<br>grub rescue&gt; ls (hd0,msdos5)/boot/grub</li>
+<li>依次执行以下命令，可进入正常的系统引导界面<br>grub rescue&gt; set root=(hd0,msdos5)/boot/grub<br>grub rescue&gt; set prefix=(hd0,msdos5)/boot/grub<br>grub rescue&gt; insmod normal<br>grub rescue&gt; normal</li>
+<li>进入linux操作系统，执行以下命令修复grub，重启后grub可恢复正常<br>$ sudo grub-install /dev/sda</li>
+</ol>
+<h4 id="archlinux挂载分区">archlinux挂载分区</h4><p>第二步，配置新分区在linux启动的时候自动挂载，并映射到某一个文件路径，比如/extend</p>
+<ol>
+<li>找到要挂载的新分区硬盘号码，比如/dev/sda5<br>$ sudo fdisk -l</li>
+<li>格式化/dev/sda5为linux系统的文件格式(也可使用其它稳定的文件格式)<br>$ sudo mkfs.ext4 /dev/sda5</li>
+<li>配置新分区在系统启动的时候挂载，并映射为/extend<br>修改<code>/etc/fstab</code>文件，在最后添加一行，注意使用对应的UUID并修改加载顺序<br>UUID=59f8ba70-62d4-4d1d-982e-a33166d59394  /extend  ext4  rw,relatime,data=ordered   0 3</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/archlinux/">archlinux</a><a href="/tags/grub-rescue/">grub rescue</a><a href="/tags/mount-partitions/">mount partitions</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2016/01/17/mount-partitions-on-startup-in-archlinux/" data-title="mount partitions on startup in archlinux | play a litle more!" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/11/22/csrf-defense/"  title="csrf defense">
+ <strong>NEXT:</strong><br/> 
+ <span>csrf defense
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#grub_rescue的处理"><span class="toc-number">1.</span> <span class="toc-text">grub rescue的处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#archlinux挂载分区"><span class="toc-number">2.</span> <span class="toc-text">archlinux挂载分区</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/archlinux/" title="archlinux">archlinux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/circular-dependency/" title="circular dependency">circular dependency<sup>1</sup></a></li>
+		
+			<li><a href="/tags/csrf/" title="csrf">csrf<sup>1</sup></a></li>
+		
+			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/grub-rescue/" title="grub rescue">grub rescue<sup>1</sup></a></li>
+		
+			<li><a href="/tags/inherited/" title="inherited">inherited<sup>1</sup></a></li>
+		
+			<li><a href="/tags/java/" title="java">java<sup>2</sup></a></li>
+		
+			<li><a href="/tags/mount-partitions/" title="mount partitions">mount partitions<sup>1</sup></a></li>
+		
+			<li><a href="/tags/spring/" title="spring">spring<sup>2</sup></a></li>
+		
+			<li><a href="/tags/transactional/" title="transactional">transactional<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2016 
+		
+		<a href="http://yoursite.com" target="_blank" title="windpuller">windpuller</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+
