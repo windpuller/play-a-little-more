@@ -7,7 +7,9 @@ title: play a litle more!
 subtitle:
 description:
 author: windpuller
-language: zh
+language:
+- zh-CN
+- default
 timezone:
 
 # URL
