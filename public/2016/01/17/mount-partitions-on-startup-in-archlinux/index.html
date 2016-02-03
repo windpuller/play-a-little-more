@@ -7,7 +7,7 @@
   <meta name="author" content="windpuller">
   
   <meta name="description" content="机器装了两个系统，一个win7备用，一个linux生产。但是最近linux的剩余磁盘空间仅10G多，眼看就要不够用了，于是想着挤挤win7，分些空间出来给linux。
-grub rescue的处理第一步，先在win7中压缩了20G出来，然后重启机器准备进入linux加载新分区，此时出现了问题，gru">
+第一步，grub rescue的处理先在win7中压缩了20G出来，然后重启机器准备进入linux加载新分区，此时出现了问题，gru">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -63,18 +63,32 @@ grub rescue的处理第一步，先在win7中压缩了20G出来，然后重启�
     <div class="entry">
       
         <p>机器装了两个系统，一个win7备用，一个linux生产。但是最近linux的剩余磁盘空间仅10G多，<br>眼看就要不够用了，于是想着挤挤win7，分些空间出来给linux。</p>
-<h4 id="grub_rescue的处理">grub rescue的处理</h4><p>第一步，先在win7中压缩了20G出来，然后重启机器准备进入linux加载新分区，此时出现了<br>问题，grub无法正常启动，进入了rescue界面。<br>解决办法是：</p>
+<h3 id="第一步，grub_rescue的处理">第一步，grub rescue的处理</h3><p>先在win7中压缩了20G出来，然后重启机器准备进入linux加载新分区，此时出现了<br>问题，grub无法正常启动，进入了rescue界面。<br>解决办法是：</p>
 <ol>
-<li>列出所有分区<br>grub rescue&gt; ls</li>
-<li>依次ls每个分区直到找到不报’unknown filesystem’的分区，比如n=5<br>grub rescue&gt; ls (hd0,msdos5)/boot/grub</li>
-<li>依次执行以下命令，可进入正常的系统引导界面<br>grub rescue&gt; set root=(hd0,msdos5)/boot/grub<br>grub rescue&gt; set prefix=(hd0,msdos5)/boot/grub<br>grub rescue&gt; insmod normal<br>grub rescue&gt; normal</li>
-<li>进入linux操作系统，执行以下命令修复grub，重启后grub可恢复正常<br>$ sudo grub-install /dev/sda</li>
+<li><p>列出所有分区</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub <span class="keyword">rescue</span>&gt; ls</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>依次ls每个分区直到找到不报’unknown filesystem’的分区，比如n=5</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub rescue&gt; ls <span class="list">(<span class="keyword">hd0</span>,msdos5)</span>/boot/grub</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>依次执行以下命令，可进入正常的系统引导界面</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grub rescue&gt; <span class="keyword">set</span> root=(hd0,msdos5)/<span class="keyword">boot</span>/grub</span><br><span class="line">grub rescue&gt; <span class="keyword">set</span> prefix=(hd0,msdos5)/<span class="keyword">boot</span>/grub</span><br><span class="line">grub rescue&gt; insmod <span class="literal">normal</span></span><br><span class="line">grub rescue&gt; <span class="literal">normal</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入linux操作系统，执行以下命令修复grub，重启后grub可恢复正常</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo grub-<span class="keyword">install</span> /dev/sda</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<h4 id="archlinux挂载分区">archlinux挂载分区</h4><p>第二步，配置新分区在linux启动的时候自动挂载，并映射到某一个文件路径，比如/extend</p>
+<h3 id="第二步，archlinux挂载分区">第二步，archlinux挂载分区</h3><p>配置新分区在linux启动的时候自动挂载，并映射到某一个文件路径，比如/extend</p>
 <ol>
-<li>找到要挂载的新分区硬盘号码，比如/dev/sda5<br>$ sudo fdisk -l</li>
-<li>格式化/dev/sda5为linux系统的文件格式(也可使用其它稳定的文件格式)<br>$ sudo mkfs.ext4 /dev/sda5</li>
-<li>配置新分区在系统启动的时候挂载，并映射为/extend<br>修改<code>/etc/fstab</code>文件，在最后添加一行，注意使用对应的UUID并修改加载顺序<br>UUID=59f8ba70-62d4-4d1d-982e-a33166d59394  /extend  ext4  rw,relatime,data=ordered   0 3</li>
+<li><p>找到要挂载的新分区硬盘号码，比如/dev/sda5</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo fdisk <span class="operator">-l</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>格式化/dev/sda5为linux系统的文件格式(也可使用其它稳定的文件格式)</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mkfs<span class="class">.ext4</span> /dev/sda5</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置新分区在系统启动的时候挂载，并映射为/extend<br>修改<code>/etc/fstab</code>文件，在最后添加一行，注意使用对应的UUID并修改加载顺序</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=<span class="number">59f</span>8ba70-<span class="number">62</span>d4-<span class="number">4</span>d1d-<span class="number">982</span>e-a33166d59394  /extend  ext4  rw,relatime,data=ordered   <span class="number">0</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 
       
