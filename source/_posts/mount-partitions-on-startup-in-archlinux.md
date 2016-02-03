@@ -3,12 +3,10 @@ date: 2016-01-17 17:36:47
 tags: [archlinux, mount partitions, grub rescue]
 ---
 
-机器装了两个系统，一个win7备用，一个linux生产。但是最近linux的剩余磁盘空间仅10G多，  
-眼看就要不够用了，于是想着挤挤win7，分些空间出来给linux。
+机器装了两个系统，一个win7备用，一个linux生产。但是最近linux的剩余磁盘空间仅10G多，眼看就要不够用了，于是想着挤挤win7，分些空间出来给linux。
 
 ### 第一步，grub rescue的处理
-先在win7中压缩了20G出来，然后重启机器准备进入linux加载新分区，此时出现了  
-问题，grub无法正常启动，进入了rescue界面。
+先在win7中压缩了20G出来，然后重启机器准备进入linux加载新分区，此时出现了问题，grub无法正常启动，进入了rescue界面。
 解决办法是：
 1. 列出所有分区
 ```

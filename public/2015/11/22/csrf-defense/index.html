@@ -63,10 +63,10 @@
     <div class="entry">
       
         <p><em>本文仅用来自己备忘，更详细内容请<a href="https://www.ibm.com/developerworks/cn/web/1102_niugang_csrf/" target="_blank" rel="external">阅读原文</a>。</em></p>
-<h4 id="防止csrf攻击的常用方法">防止csrf攻击的常用方法</h4><h5 id="1-_HTTP_Reference">1. HTTP Reference</h5><p><strong>原理</strong>：检查HTTP Reference的地址，判定请求的来源。<br><strong>缺点</strong>：低版本浏览器（IE6等）可以篡改HTTP Reference，达不到防御效果；较新的浏览器<br>允许用户关闭HTTP Reference的使用，致使用户的正常请求也不能通过。</p>
-<h5 id="2-_url中添加token参数">2. url中添加token参数</h5><p><strong>原理</strong>：检查请求url中的token值是否是合法的。<br><strong>缺点</strong>：所有请求地址中添加token字段，实现起来较复杂；url中的token很容易被攻击者获取到。</p>
-<h5 id="3-_HTTP协议头部添加自定义属性">3. HTTP协议头部添加自定义属性</h5><p><strong>原理</strong>：检查HTTP头部的csrfToken字段值是否合法。<br><strong>缺点</strong>：要使用XMLHttpRequest一次性给该类的所有请求添加csrfToken字段，而XMLHttpRequest<br>的使用局限性很大，并非所有的请求都适合由XMLHttpRequest发起，使用XMLHttpRequest请求到<br>的页面不能被浏览器记录，给用户带来不便。</p>
-<h4 id="推荐的防御方式">推荐的防御方式</h4><p>2+3, 对于安全性要求没那么高的请求，可以采用在url中添加token参数的方法防御<br>csrf，对于安全性要求比较高的请求，则使用在HTTP协议头部添加csrfToken的方式。</p>
+<h2 id="防止csrf攻击的常用方法">防止csrf攻击的常用方法</h2><h3 id="1-_HTTP_Reference">1. HTTP Reference</h3><p><strong>原理</strong>：检查HTTP Reference的地址，判定请求的来源。<br><strong>缺点</strong>：低版本浏览器（IE6等）可以篡改HTTP Reference，达不到防御效果；较新的浏览器允许用户关闭HTTP Reference的使用，致使用户的正常请求也不能通过。</p>
+<h3 id="2-_url中添加token参数">2. url中添加token参数</h3><p><strong>原理</strong>：检查请求url中的token值是否是合法的。<br><strong>缺点</strong>：所有请求地址中添加token字段，实现起来较复杂；url中的token很容易被攻击者获取到。</p>
+<h3 id="3-_HTTP协议头部添加自定义属性">3. HTTP协议头部添加自定义属性</h3><p><strong>原理</strong>：检查HTTP头部的csrfToken字段值是否合法。<br><strong>缺点</strong>：要使用XMLHttpRequest一次性给该类的所有请求添加csrfToken字段，而XMLHttpRequest的使用局限性很大，并非所有的请求都适合由XMLHttpRequest发起，使用XMLHttpRequest请求到的页面不能被浏览器记录，给用户带来不便。</p>
+<h3 id="推荐的防御方式">推荐的防御方式</h3><p>2+3, 对于安全性要求没那么高的请求，可以采用在url中添加token参数的方法防御csrf，对于安全性要求比较高的请求，则使用在HTTP协议头部添加csrfToken的方式。</p>
 
       
     </div>
