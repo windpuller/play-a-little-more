@@ -1,98 +1,69 @@
-
- <!DOCTYPE HTML>
-<html >
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   
-    <title>git base commands | play a litle more!</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="windpuller">
-    
-    <meta name="description" content="初始化$ mkdir test$ cd test$ git init
+  <title>git base commands | play a litle more!</title>
+  <meta name="author" content="windpuller">
+  
+  <meta name="description" content="初始化$ mkdir test$ cd test$ git init
 config$ git config –global user.name username$ git config –global user.email useremail.chn@gmail.com
 文件修改 、查看状态、文件添">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="git base commands"/>
+  <meta property="og:site_name" content="play a litle more!"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="play a litle more!" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
 </head>
 
-  <body>
-    <header>
-      <div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.jpg" alt="play a litle more!" title="play a litle more!"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="play a litle more!">play a litle more!</a></h1>
-				<h2 class="blog-motto"></h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/">Home</a></li>
-					
-						<li><a href="/archives">Archives</a></li>
-					
-					<li>
-					
-					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
-                        <input name=tn type=hidden value="bds">
-                        <input name=cl type=hidden value="3">
-                        <input name=ct type=hidden value="2097152">
-						<input type="hidden" name="si" value="yoursite.com">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">play a litle more!</a></h1>
+  <h2><a href="/"></a></h2>
 </div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-09-24T03:52:12.000Z"><a href="/2015/09/24/git-base-commands/">2015-09-24</a></time>
+      
+      
+  
+    <h1 class="title">git base commands</h1>
+  
 
     </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/09/24/git-base-commands/" title="git base commands" itemprop="url">git base commands</a>
-  </h1>
-  <p class="article-author">By
-    
-      <a href="http://yoursite.com" title="windpuller">windpuller</a>
-    </p>
-  <p class="article-time">
-    <time datetime="2015-09-24T03:52:12.000Z" itemprop="datePublished">2015-09-24</time>
-    Updated:<time datetime="2015-12-15T07:37:09.491Z" itemprop="dateModified">2015-12-15</time>
-    
-  </p>
-</header>
-
-	<div class="article-content">
-		
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化"><span class="toc-number">1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#config"><span class="toc-number">2.</span> <span class="toc-text">config</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件修改_、查看状态、文件添加以及修改提交"><span class="toc-number">3.</span> <span class="toc-text">文件修改 、查看状态、文件添加以及修改提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#版本切换"><span class="toc-number">4.</span> <span class="toc-text">版本切换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程提交"><span class="toc-number">5.</span> <span class="toc-text">远程提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#检出仓库"><span class="toc-number">6.</span> <span class="toc-text">检出仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分支"><span class="toc-number">7.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更新与合并"><span class="toc-number">8.</span> <span class="toc-text">更新与合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标签"><span class="toc-number">9.</span> <span class="toc-text">标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#替换本地改动"><span class="toc-number">10.</span> <span class="toc-text">替换本地改动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实用小贴士"><span class="toc-number">11.</span> <span class="toc-text">实用小贴士</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考文献："><span class="toc-number">12.</span> <span class="toc-text">参考文献：</span></a></li></ol>
-		</div>
-		
-		<h4 id="初始化">初始化</h4><p><code>$ mkdir test</code><br><code>$ cd test</code><br><code>$ git init</code></p>
+    <div class="entry">
+      
+        <h4 id="初始化">初始化</h4><p><code>$ mkdir test</code><br><code>$ cd test</code><br><code>$ git init</code></p>
 <h4 id="config">config</h4><p><code>$ git config –global user.name username</code><br><code>$ git config –global user.email useremail.chn@gmail.com</code></p>
 <h4 id="文件修改_、查看状态、文件添加以及修改提交">文件修改 、查看状态、文件添加以及修改提交</h4><p><code>$ echo “hello world”&gt;&gt;new.txt</code><br><code>$ git status</code><br><code>$ git add new.txt</code><br><code>$ git status</code><br>提交第一个版本<br><code>$ git commit -m “first”</code> </p>
 <p><code>$ echo “hello new world”&gt;&gt;new.txt</code><br><code>$ git status</code><br><code>$ git add new.txt</code><br><code>$ git status</code><br>提交第二个版本<br><code>$ git commit -m “second”</code></p>
@@ -107,225 +78,125 @@ config$ git config –global user.name username$ git config –global user.email
 <h4 id="参考文献：">参考文献：</h4><ol>
 <li><a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">http://rogerdudler.github.io/git-guide/index.zh.html</a></li>
 </ol>
-  
-	</div>
-		<footer class="article-footer clearfix">
 
-  <div class="article-tags">
+      
+    </div>
+    <footer>
+      
+        
+        
   
-  <span></span> <a href="/tags/git/">git</a>
+  <div class="tags">
+    <a href="/tags/git/">git</a>
   </div>
 
-
-
-
-<div class="article-share" id="share">
-
-  <div data-url="http://yoursite.com/2015/09/24/git-base-commands/" data-title="git base commands | play a litle more!" data-tsina="null" class="share clearfix">
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
   </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
 
-</div>
-</footer>   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2015/10/25/Spring-circular-dependency/" title="Spring circular dependency">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  Spring circular dependency</span>
-</a>
-</div>
-
-
-</nav>
-
-	
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化"><span class="toc-number">1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#config"><span class="toc-number">2.</span> <span class="toc-text">config</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件修改_、查看状态、文件添加以及修改提交"><span class="toc-number">3.</span> <span class="toc-text">文件修改 、查看状态、文件添加以及修改提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#版本切换"><span class="toc-number">4.</span> <span class="toc-text">版本切换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程提交"><span class="toc-number">5.</span> <span class="toc-text">远程提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#检出仓库"><span class="toc-number">6.</span> <span class="toc-text">检出仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分支"><span class="toc-number">7.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更新与合并"><span class="toc-number">8.</span> <span class="toc-text">更新与合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标签"><span class="toc-number">9.</span> <span class="toc-text">标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#替换本地改动"><span class="toc-number">10.</span> <span class="toc-text">替换本地改动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实用小贴士"><span class="toc-number">11.</span> <span class="toc-text">实用小贴士</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考文献："><span class="toc-number">12.</span> <span class="toc-text">参考文献：</span></a></li></ol>
+      
+      <div class="clearfix"></div>
+    </footer>
   </div>
+</article>
 
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
-<aside class="clearfix">
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://windpuller.github.io/2015/09/24/git-base-commands/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:windpuller.github.io">
+  </form>
+</div>
 
   
 
   
-<div class="tagslist">
-	<p class="asidetitle">Tags</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/archlinux/" title="archlinux">archlinux<sup>1</sup></a></li>
-		
-			<li><a href="/tags/circular-dependency/" title="circular dependency">circular dependency<sup>1</sup></a></li>
-		
-			<li><a href="/tags/csrf/" title="csrf">csrf<sup>1</sup></a></li>
-		
-			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
-		
-			<li><a href="/tags/grub-rescue/" title="grub rescue">grub rescue<sup>1</sup></a></li>
-		
-			<li><a href="/tags/inherited/" title="inherited">inherited<sup>1</sup></a></li>
-		
-			<li><a href="/tags/java/" title="java">java<sup>2</sup></a></li>
-		
-			<li><a href="/tags/mount-partitions/" title="mount partitions">mount partitions<sup>1</sup></a></li>
-		
-			<li><a href="/tags/spring/" title="spring">spring<sup>2</sup></a></li>
-		
-			<li><a href="/tags/transactional/" title="transactional">transactional<sup>1</sup></a></li>
-		
-		</ul>
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/archlinux/">archlinux</a><small>1</small></li>
+  
+    <li><a href="/tags/circular-dependency/">circular dependency</a><small>1</small></li>
+  
+    <li><a href="/tags/csrf/">csrf</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/grub-rescue/">grub rescue</a><small>1</small></li>
+  
+    <li><a href="/tags/inherited/">inherited</a><small>1</small></li>
+  
+    <li><a href="/tags/java/">java</a><small>2</small></li>
+  
+    <li><a href="/tags/mount-partitions/">mount partitions</a><small>1</small></li>
+  
+    <li><a href="/tags/spring/">spring</a><small>2</small></li>
+  
+    <li><a href="/tags/transactional/">transactional</a><small>1</small></li>
+  
+  </ul>
 </div>
-
 
 </aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 windpuller
+  
 </div>
-    </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<div class="social-font" class="clearfix">
-		
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2016 
-		
-		<a href="http://yoursite.com" target="_blank" title="windpuller">windpuller</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
-  });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-    c.click(function(){
-      ta.css('display', 'block').addClass('fadeIn');
-    });
-    o.click(function(){
-      ta.css('display', 'none');
-    });
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,320-$(this).scrollTop()));
-    });
-  };
-});
-</script>
-
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
-
-
-
-
-
-
-
-
-
-  </body>
+</body>
 </html>
-

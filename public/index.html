@@ -1,263 +1,318 @@
-
- <!DOCTYPE HTML>
-<html >
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   
-    <title>play a litle more!</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="windpuller">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <title>play a litle more!</title>
+  <meta name="author" content="windpuller">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="play a litle more!"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="play a litle more!" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
 </head>
 
-  <body>
-    <header>
-      <div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.jpg" alt="play a litle more!" title="play a litle more!"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="play a litle more!">play a litle more!</a></h1>
-				<h2 class="blog-motto"></h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/">Home</a></li>
-					
-						<li><a href="/archives">Archives</a></li>
-					
-					<li>
-					
-					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="wd" autocomplete="off" maxlength="20" placeholder="Search" />
-                        <input name=tn type=hidden value="bds">
-                        <input name=cl type=hidden value="3">
-                        <input name=ct type=hidden value="2097152">
-						<input type="hidden" name="si" value="yoursite.com">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">play a litle more!</a></h1>
+  <h2><a href="/"></a></h2>
 </div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-17T09:36:47.000Z"><a href="/2016/01/17/mount-partitions-on-startup-in-archlinux/">2016-01-17</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/17/mount-partitions-on-startup-in-archlinux/">mount partitions on startup in archlinux</a></h1>
+  
 
     </header>
-    
+    <div class="entry">
+      
+        <p>机器装了两个系统，一个win7备用，一个linux生产。但是最近linux的剩余磁盘空间仅10G多，<br>眼看就要不够用了，于是想着挤挤win7，分些空间出来给linux。</p>
+<h4 id="grub_rescue的处理">grub rescue的处理</h4><p>第一步，先在win7中压缩了20G出来，然后重启机器准备进入linux加载新分区，此时出现了<br>问题，grub无法正常启动，进入了rescue界面。<br>解决办法是：</p>
+<ol>
+<li>列出所有分区<br>grub rescue&gt; ls</li>
+<li>依次ls每个分区直到找到不报’unknown filesystem’的分区，比如n=5<br>grub rescue&gt; ls (hd0,msdos5)/boot/grub</li>
+<li>依次执行以下命令，可进入正常的系统引导界面<br>grub rescue&gt; set root=(hd0,msdos5)/boot/grub<br>grub rescue&gt; set prefix=(hd0,msdos5)/boot/grub<br>grub rescue&gt; insmod normal<br>grub rescue&gt; normal</li>
+<li>进入linux操作系统，执行以下命令修复grub，重启后grub可恢复正常<br>$ sudo grub-install /dev/sda</li>
+</ol>
+<h4 id="archlinux挂载分区">archlinux挂载分区</h4><p>第二步，配置新分区在linux启动的时候自动挂载，并映射到某一个文件路径，比如/extend</p>
+<ol>
+<li>找到要挂载的新分区硬盘号码，比如/dev/sda5<br>$ sudo fdisk -l</li>
+<li>格式化/dev/sda5为linux系统的文件格式(也可使用其它稳定的文件格式)<br>$ sudo mkfs.ext4 /dev/sda5</li>
+<li>配置新分区在系统启动的时候挂载，并映射为/extend<br>修改<code>/etc/fstab</code>文件，在最后添加一行，注意使用对应的UUID并修改加载顺序<br>UUID=59f8ba70-62d4-4d1d-982e-a33166d59394  /extend  ext4  rw,relatime,data=ordered   0 3</li>
+</ol>
 
-    <div id="container">
-      <div id="main">
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/01/17/mount-partitions-on-startup-in-archlinux/" title="mount partitions on startup in archlinux" itemprop="url">
-  
-    <h1 itemprop="name">mount partitions on startup in archlinux</h1>
-    
-     
-           <p itemprop="description" >机器装了两个系统，一个win7备用，一个linux生产。但是最近linux的剩余磁盘空间仅10G多，眼看就要不够用了，于是想着挤挤win7，分些空间出来给linux。
-grub rescue的处理第一步，先在win7中压缩了20G出来，然后重启机器准备进入linux加载新分区，此</p>
+      
+    </div>
+    <footer>
+      
         
-    
-    <time datetime="2016-01-17T09:36:47.000Z" itemprop="datePublished">2016-01-17</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2015/11/22/csrf-defense/" title="csrf defense" itemprop="url">
-  
-    <h1 itemprop="name">csrf defense</h1>
-    
-     
-           <p itemprop="description" >本文仅用来自己备忘，更详细内容请阅读原文。
-防止csrf攻击的常用方法1. HTTP Reference原理：检查HTTP Reference的地址，判定请求的来源。缺点：低版本浏览器（IE6等）可以篡改HTTP Reference，达不到防御效果；较新的浏览器允许用户关闭HTT</p>
         
-    
-    <time datetime="2015-11-22T06:39:32.000Z" itemprop="datePublished">2015-11-22</time>
-  </a>
-</section>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
 
-  <section class="post" itemscope itemprop="blogPost">
+
+
+
+  <article class="post">
   
-    <a href="/2015/11/08/transactional/" title="@transactional" itemprop="url">
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-11-22T06:39:32.000Z"><a href="/2015/11/22/csrf-defense/">2015-11-22</a></time>
+      
+      
   
-    <h1 itemprop="name">@transactional</h1>
-    
-     
-           <p itemprop="description" >在＠Transactional注解的程序块中调用未使用＠Transactional注解的方法，则事务将在未被注解的方法中继续生效。在未被注解的方法中，继续使用事务中的数据库连接，该方法中的任何异常都会引起事务的回滚。在＠Transactional注解的程序块中调用使用＠Trans</p>
+    <h1 class="title"><a href="/2015/11/22/csrf-defense/">csrf defense</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><em>本文仅用来自己备忘，更详细内容请<a href="https://www.ibm.com/developerworks/cn/web/1102_niugang_csrf/" target="_blank" rel="external">阅读原文</a>。</em></p>
+<h4 id="防止csrf攻击的常用方法">防止csrf攻击的常用方法</h4><h5 id="1-_HTTP_Reference">1. HTTP Reference</h5><p><strong>原理</strong>：检查HTTP Reference的地址，判定请求的来源。<br><strong>缺点</strong>：低版本浏览器（IE6等）可以篡改HTTP Reference，达不到防御效果；较新的浏览器<br>允许用户关闭HTTP Reference的使用，致使用户的正常请求也不能通过。</p>
+<h5 id="2-_url中添加token参数">2. url中添加token参数</h5><p><strong>原理</strong>：检查请求url中的token值是否是合法的。<br><strong>缺点</strong>：所有请求地址中添加token字段，实现起来较复杂；url中的token很容易被攻击者获取到。</p>
+<h5 id="3-_HTTP协议头部添加自定义属性">3. HTTP协议头部添加自定义属性</h5><p><strong>原理</strong>：检查HTTP头部的csrfToken字段值是否合法。<br><strong>缺点</strong>：要使用XMLHttpRequest一次性给该类的所有请求添加csrfToken字段，而XMLHttpRequest<br>的使用局限性很大，并非所有的请求都适合由XMLHttpRequest发起，使用XMLHttpRequest请求到<br>的页面不能被浏览器记录，给用户带来不便。</p>
+<h4 id="推荐的防御方式">推荐的防御方式</h4><p>2+3, 对于安全性要求没那么高的请求，可以采用在url中添加token参数的方法防御<br>csrf，对于安全性要求比较高的请求，则使用在HTTP协议头部添加csrfToken的方式。</p>
+
+      
+    </div>
+    <footer>
+      
         
-    
-    <time datetime="2015-11-08T03:36:44.000Z" itemprop="datePublished">2015-11-08</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2015/10/25/Spring-circular-dependency/" title="Spring circular dependency" itemprop="url">
-  
-    <h1 itemprop="name">Spring circular dependency</h1>
-    
-     
-           <p itemprop="description" >最近踩了一个继承加循环依赖的坑，抽象出的代码如下：ChildClass:12345678910@Servicepublic class ChildClass extends ParentClass &amp;#123;    @Resource    private TestServic</p>
         
-    
-    <time datetime="2015-10-25T06:11:22.000Z" itemprop="datePublished">2015-10-25</time>
-  </a>
-</section>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
 
-  <section class="post" itemscope itemprop="blogPost">
+
+
+
+  <article class="post">
   
-    <a href="/2015/09/24/git-base-commands/" title="git base commands" itemprop="url">
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-11-08T03:36:44.000Z"><a href="/2015/11/08/transactional/">2015-11-08</a></time>
+      
+      
   
-    <h1 itemprop="name">git base commands</h1>
-    
-     
-           <p itemprop="description" >初始化$ mkdir test$ cd test$ git init
-config$ git config –global user.name username$ git config –global user.email useremail.chn@gmail.com
-文件修改</p>
+    <h1 class="title"><a href="/2015/11/08/transactional/">@transactional</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在<code>＠Transactional</code>注解的程序块中调用未使用<code>＠Transactional</code>注解的方法，则事务将在未被注解的方法中继续生效。在未被注解的方法中，继续使用事务中的数据库连接，该方法中的任何异常都会引起事务的回滚。<br>在<code>＠Transactional</code>注解的程序块中调用使用<code>＠Transactional</code>注解的方法，如果这两个方法属于同一个实例，那么事务在被调用的方法中不会生效；如果两个方法属于不同的实例，则事务在被调用的方法中继续生效。<br>同理，在一个实例内部，通过未被<code>＠Transactional</code>注解的方法调用被<code>＠Transactional</code>注解的方法，被调用方法的事务也不会生效。<br>之所以会出现以上现象，是受到Spring AOP机制的限制。<code>＠Transactional</code>注解使用的是Spring的AOP机制，AOP仅在外部实例调用被注解的方法时才会生效，在同一个实例中调用任何被注解的方法都只能调用到原生方法，而不是注解后生成的代理方法。<br>如果不得不在一个实例内部调用被<code>＠Transactional</code>注解的方法，需要在这个实例内部显示的注入自身类的实例，并通过这个被注入的实例调用被注解的方法，才能访问到代理方法使事务生效。示例如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Service</span>(<span class="string">"transactionalTestClass"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TransactionalTestClass</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="annotation">@Resource</span>(<span class="string">"transactionalTestClass"</span>)</span><br><span class="line">    <span class="keyword">private</span> TransactionalTestClass transactionalTestClass;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">noTransactionalMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">        transactionalTestClass.transactionalMethod();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Transactional</span>(rollbackFor = Exception.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transactionalMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//do somthing</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer>
+      
         
-    
-    <time datetime="2015-09-24T03:52:12.000Z" itemprop="datePublished">2015-09-24</time>
-  </a>
-</section>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
 
 
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-25T06:11:22.000Z"><a href="/2015/10/25/Spring-circular-dependency/">2015-10-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/25/Spring-circular-dependency/">Spring circular dependency</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>最近踩了一个继承加循环依赖的坑，抽象出的代码如下：<br>ChildClass:<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Service</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">ChildClass</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">ParentClass</span> &#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">TestService</span> testService;</span><br><span class="line"></span><br><span class="line">    public <span class="type">String</span> play() &#123;</span><br><span class="line">        <span class="keyword">return</span> testService.getParent().play();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ParentClass:<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ParentClass</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String <span class="keyword">value</span> = <span class="string">"I am parent class"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">play</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">value</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span>(<span class="params">String str</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.<span class="keyword">value</span> = str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>TestService:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ParentClass parent;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        parent = create();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ParentClass <span class="title">getParent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.parent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@SuppressWarnings</span>(&#123; <span class="string">"rawtypes"</span>, <span class="string">"unchecked"</span> &#125;)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ParentClass <span class="title">create</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class classDefinition = Class.forName(<span class="string">"com.springapp.mvc.inherited.ChildClass"</span>);</span><br><span class="line">            ParentClass parent = (ParentClass) classDefinition.getConstructor(<span class="keyword">new</span> Class[<span class="number">0</span>]).newInstance(<span class="keyword">new</span> Object[<span class="number">0</span>]);</span><br><span class="line">            parent.setValue(<span class="string">"I was processed by test service"</span>);</span><br><span class="line">            <span class="keyword">return</span> parent;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ResultController:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Controller</span></span><br><span class="line"><span class="annotation">@RequestMapping</span>(<span class="string">"/inherited"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResultController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> ChildClass childClass;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@RequestMapping</span>(method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">printWelcome</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ModelAndView modelAndView = <span class="keyword">new</span> ModelAndView(<span class="string">"hello"</span>);</span><br><span class="line">        modelAndView.addObject(<span class="string">"message"</span>, childClass.play());</span><br><span class="line">        <span class="keyword">return</span> modelAndView;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们注意到，ChildClass重写了ParentClass的play方法。由于在TestService中使用反射<br>方式生成了ChildClass的实例，并赋值给了ParentClass的实例，此时ParentClass实例并不能<br>访问到ChildClass实例的成员变量testService，且ParentClass实例的play方法已经被<br>ChildClass实例的play方法隐藏，也就是说<code>testService.getParent().play()</code><br>实际调用的是ChildClass的play()方法，显而易见，此处出现了循环调用。但是由于ParentClass<br>的实例中<code>testService == null</code>，因此程序在进入这一层时会抛出NPE。</p>
+<p>之后我们使用注解在TestService中实现成员变量parent的初始化，代码如下：<br>ParentClass:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestService</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="annotation">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> ParentClass parent;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        parent.setValue(<span class="string">"I was processed by test service"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ParentClass <span class="title">getParent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.parent;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>此时运行程序，NPE消失了，但是出现栈溢出问题。<br>从<code>＠Resource</code>的注解来看，注解的继承关系是向上的，所有使用注解注入的实例共用<br>资源，即以依赖注入形式实现的ChildClass和ParentClass的实例共享资源。因此，TestService中<br>的成员变量parent可以访问到子类ChildClass实例的成员变量testService，进而形成循环依赖并<br>最终导致栈溢出。<br><code>＠Resource</code>部分注解：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">* Even though this annotation <span class="keyword">is</span> <span class="keyword">not</span> marked Inherited, deployment</span><br><span class="line">* tools are required <span class="keyword">to</span> examine all superclasses <span class="keyword">of</span> any component</span><br><span class="line">* <span class="type">class</span> <span class="keyword">to</span> discover all uses <span class="keyword">of</span> this annotation <span class="keyword">in</span> all superclasses.</span><br><span class="line">* All such annotation instances specify resources <span class="keyword">that</span> are needed</span><br><span class="line">* <span class="keyword">by</span> <span class="keyword">the</span> <span class="type">application</span> component.  Note <span class="keyword">that</span> this annotation may</span><br><span class="line">* appear <span class="function_start"><span class="keyword">on</span></span> private fields <span class="keyword">and</span> methods <span class="keyword">of</span> superclasses; <span class="keyword">the</span> container</span><br><span class="line">* <span class="keyword">is</span> required <span class="keyword">to</span> perform injection <span class="keyword">in</span> these cases <span class="keyword">as</span> well.</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-09-24T03:52:12.000Z"><a href="/2015/09/24/git-base-commands/">2015-09-24</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/09/24/git-base-commands/">git base commands</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h4 id="初始化">初始化</h4><p><code>$ mkdir test</code><br><code>$ cd test</code><br><code>$ git init</code></p>
+<h4 id="config">config</h4><p><code>$ git config –global user.name username</code><br><code>$ git config –global user.email useremail.chn@gmail.com</code></p>
+<h4 id="文件修改_、查看状态、文件添加以及修改提交">文件修改 、查看状态、文件添加以及修改提交</h4><p><code>$ echo “hello world”&gt;&gt;new.txt</code><br><code>$ git status</code><br><code>$ git add new.txt</code><br><code>$ git status</code><br>提交第一个版本<br><code>$ git commit -m “first”</code> </p>
+<p><code>$ echo “hello new world”&gt;&gt;new.txt</code><br><code>$ git status</code><br><code>$ git add new.txt</code><br><code>$ git status</code><br>提交第二个版本<br><code>$ git commit -m “second”</code></p>
+<h4 id="版本切换">版本切换</h4><p>查看更新记录<br><code>$ git log</code><br>使用能够区别版本的前几位即可<br><code>$ git checkout commit-id</code></p>
+<h4 id="远程提交">远程提交</h4><p>添加远程仓库<br><code>$ git remote add origin <a href="https://github.com/windpuller/test.git" target="_blank" rel="external">https://github.com/windpuller/test.git</a></code><br>将修改提交到服务器端<br><code>$ git push -u origin master</code></p>
+<h4 id="检出仓库">检出仓库</h4><p>创建本地仓库的克隆版本<br><code>$ git clone /path/to/repository</code><br>创建远端服务器的克隆版本<br><code>$ git clone uxername@host:/past/to/repository</code></p>
+<h4 id="分支">分支</h4><p>创建分支<br><code>$ git branch branch1</code><br>切换分支<br><code>$ git checkout branch1</code><br>删除本地分支<br><code>$ git branch -d branch1 </code><br>删除远程分支(慎重使用)<br><code>$ git branch -r -d origin/branch1</code><br><code>$ git push origin :branch1</code><br>将分支推送到远端仓库，不推送的话分支是不为他人所见的<br><code>$ git push origin branch1</code></p>
+<h4 id="更新与合并">更新与合并</h4><p>更新本地仓库至最新改动，完成了获取fetch并合并merge改动的功能<br><code>$ git pull</code><br>合并其他分支到当前分支<br><code>$ git merge branch</code><br>在以上两种情况下，git都会尝试自动合并改动。但是不是每次合并都能成功，可能出现冲突。<br>这时候就需要修改文件来手动合并这些冲突。改完文件之后，需要执行以下命令以将它们标记为合并成功：<br><code>$ git add filename</code><br>在合并改动之前，可以使用如下命令预览差异：<br><code>$git diff source_branch target_branch</code></p>
+<h4 id="标签">标签</h4><p>为某个版本创建标签<br><code>$ git tag tag-name commit-ID</code></p>
+<h4 id="替换本地改动">替换本地改动</h4><p>如果操作失误，可以使用HEAD中的最新内容替换掉工作目录中的文件，已添加到缓存区的改动和新文件都不会受到影响<br><code>$ git checkout – filename</code><br>如果想要放弃本地的所有改动和提交，可以到服务器上获取最新的版本历史，并将本地主分支指向它：<br><code>$ git fetch origin</code><br><code>$ git reset –hard origin/master</code></p>
+<h4 id="实用小贴士">实用小贴士</h4><p>内建的图形化git<br><code>$ gitk</code><br>彩色的git输出<br><code>$ git config color.ui true</code><br>显示历史记录时，每个提交的信息只显示一行<br><code>$ git config format.pretty oneline</code><br>交互式添加文件到暂存区<br><code>$ git add -i</code></p>
+<h4 id="参考文献：">参考文献：</h4><ol>
+<li><a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">http://rogerdudler.github.io/git-guide/index.zh.html</a></li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:windpuller.github.io">
+  </form>
 </div>
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
-<aside class="clearfix">
 
   
 
   
-<div class="tagslist">
-	<p class="asidetitle">Tags</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/archlinux/" title="archlinux">archlinux<sup>1</sup></a></li>
-		
-			<li><a href="/tags/circular-dependency/" title="circular dependency">circular dependency<sup>1</sup></a></li>
-		
-			<li><a href="/tags/csrf/" title="csrf">csrf<sup>1</sup></a></li>
-		
-			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
-		
-			<li><a href="/tags/grub-rescue/" title="grub rescue">grub rescue<sup>1</sup></a></li>
-		
-			<li><a href="/tags/inherited/" title="inherited">inherited<sup>1</sup></a></li>
-		
-			<li><a href="/tags/java/" title="java">java<sup>2</sup></a></li>
-		
-			<li><a href="/tags/mount-partitions/" title="mount partitions">mount partitions<sup>1</sup></a></li>
-		
-			<li><a href="/tags/spring/" title="spring">spring<sup>2</sup></a></li>
-		
-			<li><a href="/tags/transactional/" title="transactional">transactional<sup>1</sup></a></li>
-		
-		</ul>
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/archlinux/">archlinux</a><small>1</small></li>
+  
+    <li><a href="/tags/circular-dependency/">circular dependency</a><small>1</small></li>
+  
+    <li><a href="/tags/csrf/">csrf</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/grub-rescue/">grub rescue</a><small>1</small></li>
+  
+    <li><a href="/tags/inherited/">inherited</a><small>1</small></li>
+  
+    <li><a href="/tags/java/">java</a><small>2</small></li>
+  
+    <li><a href="/tags/mount-partitions/">mount partitions</a><small>1</small></li>
+  
+    <li><a href="/tags/spring/">spring</a><small>2</small></li>
+  
+    <li><a href="/tags/transactional/">transactional</a><small>1</small></li>
+  
+  </ul>
 </div>
-
 
 </aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 windpuller
+  
 </div>
-    </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<div class="social-font" class="clearfix">
-		
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wizicer/iceman" target="_blank" title="Iceman">Iceman</a> © 2016 
-		
-		<a href="http://yoursite.com" target="_blank" title="windpuller">windpuller</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-        
-    }
-  });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
 </script>
 
-
-
-
-
-
-
-
-
-
-  </body>
- </html>
-
+</body>
+</html>
