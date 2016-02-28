@@ -31,7 +31,7 @@ boolean existing = dataMap.containsKey(1);
 ```
 明明dataMap中存在key=1的键值对，但是得到的结果却是false。
 此时debug查看dataMap的内容(如下)，发现dataMap中是存在key=1的键值对的。但是查看key的类型，并不是int而是char，而上边调用constainsKey()方法传入的参数是int，因此返回false。
-![cast_numeric_string_to_Integer01.png](./images/cast_number_string_to_Integer01.png)
+![cast_numeric_string_to_Integer01.png](./images/cast_numeric_string_to_Integer01.png)
 可见造成以上现象的原因是，字符串类型的数字在强转成Integer类型时是以ASCII码的形式转换的。
 修改代码如下，我们得到了想要的结果。
 ```
